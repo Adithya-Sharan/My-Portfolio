@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDFCFA;
+  --surface: #FFFFFF;
+  --ink: #1A1A1A;
+  --muted: #6B6B6B;
+  --accent: #C45C3E;
+  --accent-weak: color-mix(in oklab, var(--accent) 10%, var(--surface));
+  --line: color-mix(in oklab, var(--ink) 10%, transparent);
+  --step--1: clamp(0.875rem, 0.85rem + 0.15vw, 1rem);
+  --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.6vw, 1.5rem);
+  --step-2: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
+  --step-3: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  --space: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+  --radius: 16px;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 12px 32px -8px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: "Space Grotesk", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* Layout */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in oklab, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+}
+
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: var(--step-1);
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: var(--step--1);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero */
+.hero {
+  padding: calc(var(--space) * 3) 0 calc(var(--space) * 2.5);
+}
+
+.hero-label {
+  display: inline-block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  font-size: var(--step-3);
+  font-weight: 700;
+  max-width: 18ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: var(--step-1);
+  color: var(--muted);
+  max-width: 52ch;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--step--1);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  background: var(--accent);
+}
+
+/* Section signature: left border + rotated label */
+.section {
+  padding: calc(var(--space) * 2) 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: calc(var(--space) * 1.2);
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+}
+
+.section-eyebrow {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  margin-top: 0.2em;
+}
+
+.section-title {
+  font-size: var(--step-2);
+  font-weight: 700;
+}
+
+.section-desc {
+  color: var(--muted);
+  max-width: 60ch;
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+
+/* Discipline cards */
+.disciplines {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: calc(var(--space) * 1.2);
+}
+
+.discipline-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 2rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.discipline-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.discipline-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-weak);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+}
+
+.discipline-card h3 {
+  font-size: var(--step-1);
+  margin-bottom: 0.5rem;
+}
+
+.discipline-card p {
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.65;
+}
+
+/* Work grid */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: calc(var(--space) * 1.2);
+}
+
+.work-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.work-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+}
+
+.work-visual {
+  height: 200px;
+  background: linear-gradient(135deg, var(--accent-weak), color-mix(in oklab, var(--accent) 6%, var(--bg)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.work-visual svg {
+  opacity: 0.35;
+}
+
+.work-tag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.35rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.work-info {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-info h3 {
+  font-size: var(--step-1);
+  margin-bottom: 0.4rem;
+}
+
+.work-info p {
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.work-meta {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Writing list */
+.writing-list {
+  margin-top: calc(var(--space) * 1.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.writing-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.writing-item:hover {
+  box-shadow: var(--shadow);
+  border-color: color-mix(in oklab, var(--accent) 30%, var(--line));
+}
+
+.writing-item h3 {
+  font-size: var(--step-0);
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.writing-item p {
+  color: var(--muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+}
+
+.writing-date {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  margin-top: 0.2rem;
+}
+
+/* About */
+.about-content {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: calc(var(--space) * 1.2);
+  align-items: start;
+  margin-top: calc(var(--space) * 1.2);
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--accent-weak), color-mix(in oklab, var(--accent) 15%, var(--bg)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar svg {
+  opacity: 0.4;
+}
+
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  max-width: 65ch;
+  line-height: 1.75;
+}
+
+.about-text p:last-child { margin-bottom: 0; }
+
+/* Skills tags */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.skill-tag {
+  background: var(--accent-weak);
+  color: var(--accent);
+  padding: 0.4rem 0.9rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Contact */
+.contact {
+  background: var(--ink);
+  color: var(--bg);
+  margin-top: calc(var(--space) * 2);
+  padding: calc(var(--space) * 2.5) 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.contact .section-header {
+  border-left-color: var(--accent);
+}
+
+.contact .section-title,
+.contact .section-desc {
+  color: var(--bg);
+}
+
+.contact .section-desc {
+  opacity: 0.75;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: calc(var(--space) * 1.2);
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: color-mix(in oklab, var(--bg) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--bg) 20%, transparent);
+  color: var(--bg);
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: var(--step--1);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.contact-links a:hover {
+  background: color-mix(in oklab, var(--bg) 18%, transparent);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+  background: var(--ink);
+  color: color-mix(in oklab, var(--bg) 50%, transparent);
+  text-align: center;
+  padding: 2rem 0 3rem;
+  font-size: var(--step--1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-cta, .discipline-card, .work-card, .writing-item, .contact-links a {
+    transition: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .nav-links { gap: 1.25rem; }
+  .about-content { grid-template-columns: 1fr; justify-items: center; }
+  .about-text { text-align: center; }
+  .skill-tags { justify-content: center; }
+  .writing-item { flex-direction: column; gap: 0.5rem; }
+  .writing-date { white-space: normal; }
+  .work-grid { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+  body { background: #fff; }
+  nav, .contact, footer { display: none; }
+  .section { padding: 1.5rem 0; page-break-inside: avoid; }
+  .work-card, .writing-item, .discipline-card { break-inside: avoid; }
+}
+@page { size: A4; margin: 18mm; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="hero-label">Web Developer / Designer / Writer</span>
+    <h1>Building thoughtful digital experiences across code, design, and story.</h1>
+    <p>I craft websites, visual identities, and written content that connect with people. Based in [Your City]. Open to collaborations and new opportunities.</p>
+    <a href="#work" class="hero-cta">
+      View Selected Work
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<section class="section" id="disciplines">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Expertise</span>
+      <div>
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-desc">Three disciplines, one consistent standard: clarity, craft, and care in every detail.</p>
+      </div>
+    </div>
+    <div class="disciplines">
+      <article class="discipline-card">
+        <div class="discipline-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>Web Development</h3>
+        <p>Responsive, accessible websites built with modern technologies. From landing pages to interactive applications, I write clean, maintainable code that performs.</p>
+      </article>
+      <article class="discipline-card">
+        <div class="discipline-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.5 8.6"/><path d="M22 22l-5.5-5.5"/></svg>
+        </div>
+        <h3>Graphic Design</h3>
+        <p>Visual identities, UI design, and marketing materials that communicate with precision. I balance aesthetics with strategy to create work that lasts.</p>
+      </article>
+      <article class="discipline-card">
+        <div class="discipline-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3>Writing</h3>
+        <p>Articles, copy, and editorial content with a clear voice and strong structure. I turn complex ideas into prose that is easy to read and hard to forget.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Projects</span>
+      <div>
+        <h2 class="section-title">Selected Work</h2>
+        <p class="section-desc">A few recent projects across web development and design. Replace these with your own work, images, and links.</p>
+      </div>
+    </div>
+    <div class="work-grid">
+      <a href="#" class="work-card">
+        <div class="work-visual">
+          <span class="work-tag">Web Development</span>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="work-info">
+          <h3>E-Commerce Platform Redesign</h3>
+          <p>A complete redesign and rebuild of an online store, focusing on performance, accessibility, and conversion optimization.</p>
+          <span class="work-meta">React / Next.js / Stripe</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="work-visual">
+          <span class="work-tag">Graphic Design</span>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="work-info">
+          <h3>Brand Identity for a Coffee Roaster</h3>
+          <p>Logo, packaging, and visual guidelines for an independent coffee brand. Warm, tactile, and unmistakably theirs.</p>
+          <span class="work-meta">Branding / Packaging / Guidelines</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="work-visual">
+          <span class="work-tag">Web Development</span>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="work-info">
+          <h3>Community Dashboard</h3>
+          <p>An internal analytics dashboard for a nonprofit, visualizing engagement metrics in a clean, intuitive interface.</p>
+          <span class="work-meta">Vue / D3 / REST API</span>
+        </div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="work-visual">
+          <span class="work-tag">Graphic Design</span>
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="work-info">
+          <h3>Editorial Illustration Series</h3>
+          <p>A set of digital illustrations for an online publication, balancing conceptual depth with visual immediacy.</p>
+          <span class="work-meta">Illustration / Art Direction</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="writing">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Writing</span>
+      <div>
+        <h2 class="section-title">Recent Writing</h2>
+        <p class="section-desc">Essays, articles, and case studies. Replace with your own pieces and links to published work.</p>
+      </div>
+    </div>
+    <div class="writing-list">
+      <a href="#" class="writing-item">
+        <div>
+          <h3>The Invisible Craft of Good UI Copy</h3>
+          <p>Why the words inside buttons and empty states matter more than most teams realize.</p>
+        </div>
+        <span class="writing-date">Oct 2025</span>
+      </a>
+      <a href="#" class="writing-item">
+        <div>
+          <h3>Designing for Accessibility from Day One</h3>
+          <p>A practical checklist for building inclusive digital products without sacrificing visual polish.</p>
+        </div>
+        <span class="writing-date">Aug 2025</span>
+      </a>
+      <a href="#" class="writing-item">
+        <div>
+          <h3>What I Learned Rebuilding My Portfolio Six Times</h3>
+          <p>Perfectionism, iteration, and knowing when to ship. A personal reflection on creative work.</p>
+        </div>
+        <span class="writing-date">Jun 2025</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Profile</span>
+      <div>
+        <h2 class="section-title">About Me</h2>
+        <p class="section-desc">A short introduction. Update this section with your own story, background, and approach.</p>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="avatar">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="about-text">
+        <p>I am a multidisciplinary creative based in [Your City], working at the intersection of technology, design, and language. With a background in [your background], I bring a holistic perspective to every project — whether I am writing frontend code, designing a brand system, or editing a long-form essay.</p>
+        <p>I believe the best work happens when disciplines overlap. A developer who understands typography builds better interfaces. A designer who understands structure creates more usable systems. A writer who understands user experience crafts clearer messages.</p>
+        <p>When I am not working, I am [your hobbies or interests]. I am currently open to freelance projects, collaborations, and full-time roles.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML / CSS / JS</span>
+          <span class="skill-tag">React / Next.js</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Brand Design</span>
+          <span class="skill-tag">UI/UX</span>
+          <span class="skill-tag">Copywriting</span>
+          <span class="skill-tag">Editorial</span>
+          <span class="skill-tag">SEO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Contact</span>
+      <div>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-desc">Have a project in mind? I would love to hear about it. Reach out and I will get back to you within 48 hours.</p>
+      </div>
+    </div>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#730a1c06015d161e121a1f33160b121e031f165d101c1e">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="__cf_email__" data-cfemail="1861776d6a367d75797174587d60797568747d367b7775">[email&#160;protected]</span>
+      </a>
+      <a href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/></svg>
+        LinkedIn
+      </a>
+      <a href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram / Dribbble
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>Your Name. Built with care. Replace this footer text with your own.</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>
